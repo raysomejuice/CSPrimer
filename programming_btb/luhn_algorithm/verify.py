@@ -15,3 +15,11 @@ def verify(digits:str) -> bool:
             reversed_digits[index] -= 9
 
     return sum(reversed_digits) % 10 == 0 
+
+
+
+    if __name__ == '__main__':
+        assert verify("17893729974")
+        assert not verify("17893729975")
+        print("OK")
+        
