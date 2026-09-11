@@ -8,9 +8,7 @@ def verify(digits:str) -> bool:
     '''
     luhn_total = 0
     for index, digit in enumerate(reversed(digits)):
-        if index % 2 != 0:
-            reversed_digits[index] *= 2
-        if reversed_digits[index] > 9:
-            reversed_digits[index] -= 9
+        digital_root = (1 + index % 2) * int(digit)
+        luhn_total += digital_root // 10 + digital_root
 
-    return sum(reversed_digits) % 10 == 0 
+    return luhn_total % 10 == 0 
