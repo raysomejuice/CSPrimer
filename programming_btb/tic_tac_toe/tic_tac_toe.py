@@ -23,9 +23,13 @@ def find_winner(piece: str, location: int, board: list[list[str]]) -> str:
     diagonal_asc = set(2, 4, 6)
 
     if board[row][prev_col] == board[row][col] == board[row][next_col] == piece or \
-        board[prev_row][col] == board[row][col] == board[next_row][col] == piece or \
+        board[prev_row][col] == board[row][col] == board[next_row][col] == piece:
+         return f"Player {piece} is the winner"
 
-    if locationboard[prev_row][prev_col] == board[row][col] == board[next_row][next_col] == piece or \
+    if location is in diagonal_asc and \
+        board[prev_row][prev_col] == board[row][col] == board[next_row][next_col] == piece:
+           
+           
            board[prev_row][next_col] == board[row][col] == board[next_row][prev_col] == piece or \
 
     # if board[0][0] == board[1][1] == board[2][2] == piece or \
