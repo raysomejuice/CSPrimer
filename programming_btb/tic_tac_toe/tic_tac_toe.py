@@ -1,4 +1,8 @@
+import os
+
 def draw_board(board: list[list[str]]) -> None:
+    print("\033c", end = "")
+
     print(f" {board[0][0]} | {board[0][1]} | {board[0][2]} ")
     print("---|---|---")
     print(f" {board[1][0]} | {board[1][1]} | {board[1][2]} ")
@@ -33,10 +37,10 @@ def find_winner(piece: str, board: list[list[str]]) -> bool:
     return False
 
 def game():
-    board_positions = [['', '', ''], 
-                       ['', '', ''], 
-                       ['', '', '']]
+    board_positions = [[' ', ' ', ' '], 
+                       [' ', ' ', ' '], 
+                       [' ', ' ', ' ']]
 
     piece = "X"
-    while not find_winner(piece, board_positions):
-
+    while True:
+        
