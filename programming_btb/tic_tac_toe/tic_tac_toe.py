@@ -1,5 +1,3 @@
-import os
-
 def draw_board(board: list[list[str]]) -> None:
     print("\033c", end = "")
 
