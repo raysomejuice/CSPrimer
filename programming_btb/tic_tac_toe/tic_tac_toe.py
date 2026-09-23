@@ -8,9 +8,10 @@ def draw_board(board: list[list[str]]) -> None:
     print(f" {board[2][0]} | {board[2][1]} | {board[2][2]} ")
 
 def make_move(piece: str, location: int, board: list[list[str]]) -> bool:
+    
     row = location // 3
     col = location % 3
-    if not board[row][col]:
+    if board[row][col] != " ":
         board[row][col] = piece
         return True
 
@@ -28,7 +29,7 @@ def find_winner(piece: str, board: list[list[str]]) -> bool:
         print(f"Player {piece} is the winner")
         return True
     
-    if all(not element for row in board for element in row):
+    if all(element != " " for row in board for element in row):
         print("The game is a tie")
         return False
     print(f"It is {piece}'s turn")
