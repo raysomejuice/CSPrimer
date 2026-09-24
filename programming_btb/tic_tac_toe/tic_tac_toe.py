@@ -1,3 +1,6 @@
+def clear_screen():
+    print("\033c", end = "")
+
 def draw_board(board: list[list[str]]) -> None:
     print(f" {board[0][0]} | {board[0][1]} | {board[0][2]} ")
     print("---|---|---")
@@ -16,17 +19,16 @@ def get_number_input() -> int:
         if selection.isdigit() and 0 < int(selection) < 10:
             return int(selection)
         else:
-            print("\033c", end = "")
+            clear_screen()
             print("Invalid selection\n")
 
-def make_move(piece: str, board: list[list[str]]) -> None:
-    while True:    
-        position = get_number_input() 
-        row = position // 3
-        col = position % 3
-        if board[row][col] == " ":
-            board[row][col] = piece
-            break
+def make_move(piece: str, position: int, board: list[list[str]]) -> bool:
+    row = position // 3
+    col = position % 3
+    if board[row][col] == " ":
+        board[row][col] = piece
+        return True
+    return False
 
 def find_winner(piece: str, board: list[list[str]]) -> bool:
     if board[0][0] == board[1][1] == board[2][2] == piece or \
@@ -51,8 +53,15 @@ def play_game():
                        [' ', ' ', ' ']]
 
     while True:
-        print("\033c", end = "")
+        clear_screen()
+        draw_board(board_positions)
         piece = "O" if "X" else "X"
         print(f"It is {piece}'s turn")
         location = get_number_input()
-
+        while not make_move(piece, location, board_positions):
+            clear_screen()
+            print("The board already has a piece in that location.\n")
+            location = get_number_input()
+        if find_winner(piece, board_positions):
+            break
+        
