@@ -11,7 +11,7 @@ def make_move(piece: str, location: int, board: list[list[str]]) -> bool:
     
     row = location // 3
     col = location % 3
-    if board[row][col] != " ":
+    if board[row][col] == " ":
         board[row][col] = piece
         return True
 
@@ -32,14 +32,14 @@ def find_winner(piece: str, board: list[list[str]]) -> bool:
     if all(element != " " for row in board for element in row):
         print("The game is a tie")
         return False
-    print(f"It is {piece}'s turn")
     return False
 
-def game():
+def play_game():
     board_positions = [[' ', ' ', ' '], 
                        [' ', ' ', ' '], 
                        [' ', ' ', ' ']]
 
-    piece = "X"
     while True:
-        
+        piece = "O" if "X" else "X"
+        location = int(input())
+        print(f"It is {piece}'s turn")
