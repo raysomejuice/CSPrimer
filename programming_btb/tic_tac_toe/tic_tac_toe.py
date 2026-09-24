@@ -23,8 +23,8 @@ def get_number_input() -> int:
             print("Invalid selection\n")
 
 def make_move(piece: str, position: int, board: list[list[str]]) -> bool:
-    row = position // 3
-    col = position % 3
+    row = (position - 1)  // 3
+    col = (position - 1) % 3
     if board[row][col] == " ":
         board[row][col] = piece
         return True
@@ -39,7 +39,9 @@ def find_winner(piece: str, board: list[list[str]]) -> bool:
        board[0][0] == board[1][0] == board[2][0] == piece or \
        board[0][1] == board[1][1] == board[2][1] == piece or \
        board[0][2] == board[1][2] == board[2][2] == piece:
-        print(f"Player {piece} is the winner")
+        clear_screen()
+        draw_board(board)
+        print(f"\nPlayer {piece} is the winner")
         return True
     
     if all(element != " " for row in board for element in row):
@@ -51,12 +53,13 @@ def play_game():
     board_positions = [[' ', ' ', ' '], 
                        [' ', ' ', ' '], 
                        [' ', ' ', ' ']]
-
+    
+    piece = "O"
     while True:
         clear_screen()
         draw_board(board_positions)
-        piece = "O" if "X" else "X"
-        print(f"It is {piece}'s turn")
+        piece = "X" if piece == "O" else "O"
+        print(f"It is {piece}'s turn\n")
         location = get_number_input()
         while not make_move(piece, location, board_positions):
             clear_screen()
@@ -64,4 +67,7 @@ def play_game():
             location = get_number_input()
         if find_winner(piece, board_positions):
             break
+
+if __name__ == "__main__":
+    play_game()
         
