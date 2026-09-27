@@ -1,6 +1,12 @@
 def clear_screen():
     print("\033c", end = "")
 
+def build_board_array() -> list[list[str]]:
+    print("You can choose the n x n grid size of your tic-tac-toe board.")
+    dimension = input("Please choose the value n for the grid size, n: ")
+    if dimension.isdigit():
+
+
 def draw_board(board: list[list[str]]) -> None:
     print(f" {board[0][0]} | {board[0][1]} | {board[0][2]} ")
     print("---|---|---")
