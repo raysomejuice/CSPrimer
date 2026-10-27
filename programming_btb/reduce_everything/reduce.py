@@ -27,7 +27,12 @@ def reduce(f, xs, init=None):
     >>> reduce(mirror, ['foo', 'bar'], {})
     {'foo': 'foo', 'bar': 'bar'}
     """
-    pass
+    xs = iter(xs)
+    if init == None:
+        init = next(xs)
+    for x in xs:
+       init = f(init, x)
+    return init
 
 
 def product(nums):
@@ -41,7 +46,7 @@ def product(nums):
     >>> product([])
     1
     """
-    pass
+    return reduce(lambda acc, x: acc * x, nums, 1)
 
 
 def my_map(f, xs):
@@ -51,7 +56,10 @@ def my_map(f, xs):
     >>> my_map(lambda x: x * x, [1, 2, 3, 4])
     [1, 4, 9, 16]
     """
-    pass
+    def map_push(init_list, x):
+        init_list.append(f(x))
+        return init_list
+    return reduce(map_push, xs, [])
 
 
 def my_filter(f, xs):
@@ -64,7 +72,11 @@ def my_filter(f, xs):
     >>> my_filter(lambda x: False, [1, 2])
     []
     """
-    pass
+    def filter_push(init_list, x):
+        if f(x):
+            init_list.append(x)
+        return init_list
+    return reduce(filter_push, xs, [])
 
 
 def my_zip(*iters):
@@ -75,7 +87,17 @@ def my_zip(*iters):
     >>> my_zip('abc', 'def', (1, 2, 3))
     [['a', 'd', 1], ['b', 'e', 2], ['c', 'f', 3]]
     """
-    pass
+    first_iter = iters[0]
+    assert all(len(first_iter) == len(iterable) 
+               for iterable in iters), "All iterables must be same length"
+
+    init = [[] for _ in range(len(iters[0]))]
+    def iter_unpack(init_list, x):
+        for i in range(len(x)):
+            init_list[i].append(x[i])
+        return init_list
+    return reduce(iter_unpack, iters, init)
+
 
 
 if __name__ == "__main__":
