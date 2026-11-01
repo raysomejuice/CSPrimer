@@ -11,12 +11,14 @@ def memoize(function):
     return memo_wrapper
 
 
+@memoize
 def fetch(url):
     with urllib.request.urlopen(url) as response:
         content = response.read().decode('utf-8')
         return content
 
 
+@memoize
 def fib(n):
     if n <= 1:
         return n
@@ -25,3 +27,4 @@ def fib(n):
 
 if __name__ == '__main__':
     print(fetch('http://google.com')[:80])
+    print(fib(800))
