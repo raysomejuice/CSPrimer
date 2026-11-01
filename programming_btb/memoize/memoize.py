@@ -6,7 +6,8 @@ def memoize(function):
     def memo_wrapper(x):
         if x in cache:
             return cache[x]
-        return function(x)
+        cache[x] = function(x)
+        return cache[x]
     return memo_wrapper
 
 
