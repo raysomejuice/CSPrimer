@@ -27,4 +27,4 @@ def fib(n):
 
 if __name__ == '__main__':
     print(fetch('http://google.com')[:80])
-    print(fib(800))
+    print(fib(475))
