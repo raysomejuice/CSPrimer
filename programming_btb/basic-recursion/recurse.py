@@ -49,9 +49,9 @@ def palindrome(letters):
     """
     if len(letters) <= 1:
         return True
-    if letters[0]  in UPPER:
+    if letters[0] in UPPER:
         return palindrome(chr(ord(letters[0]) + 32) + letters[1:])
-    if letters[-1]  in UPPER:
+    if letters[-1] in UPPER:
         return palindrome(letters[:-1] + chr(ord(letters[-1]) + 32))
     if letters[0] not in LOWER:
         return palindrome(letters[1:])
